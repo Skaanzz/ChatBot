@@ -8,7 +8,10 @@ COPY api/package.json api/package-lock.json ./
 RUN npm ci --omit=dev
 
 # Copy API source
-COPY api/index.js ./
+COPY api/. ./
+
+# Copy frontend into ./public to be served by Express
+COPY app/. ./public/
 
 ENV NODE_ENV=production
 EXPOSE 3000

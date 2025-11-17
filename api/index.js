@@ -4,10 +4,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
+const path = require('path');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+
+// Serve static frontend files from ./public (populated in Docker image)
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Simple request logger
 app.use((req, res, next) => {
@@ -22,7 +26,7 @@ const config = new Configuration({
 const openai = new OpenAIApi(config);
 
 app.get('/', (req, res) => {
-    res.send('Welcome to the Coding Nexus API')
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 })
 
 // Handle CORS preflight explicitly for /message

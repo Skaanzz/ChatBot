@@ -3,6 +3,9 @@ const inputField = chatBox.querySelector("input[type='text']");
 const button = chatBox.querySelector("button");
 const chatBoxBody = chatBox.querySelector(".chat-box-body");
 
+// Build API base from current origin (works when UI is served by the API container)
+const apiBase = window.location.origin;
+
 button.addEventListener("click", sendMessage);
 inputField.addEventListener("keypress", function(event) {
   if (event.key === "Enter") {
@@ -31,7 +34,7 @@ function sendMessage() {
             window.dotsGoingUp = false;
     }, 250);
 
-  fetch('http://localhost:3000/message', {
+  fetch(`${apiBase}/message`, {
     method: 'POST',
     headers: {
       accept: 'application/json',
