@@ -3,8 +3,10 @@ const inputField = chatBox.querySelector("input[type='text']");
 const button = chatBox.querySelector("button");
 const chatBoxBody = chatBox.querySelector(".chat-box-body");
 
-// Build API base from current origin (works when UI is served by the API container)
-const apiBase = window.location.origin;
+// Resolve API base: use localhost:3000 when running from file:// or a static server (e.g., :5500)
+const apiBase = (window.location.protocol === 'file:' || window.location.origin.includes(':5500'))
+  ? 'http://localhost:3000'
+  : window.location.origin;
 
 button.addEventListener("click", sendMessage);
 inputField.addEventListener("keypress", function(event) {
