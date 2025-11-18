@@ -1,6 +1,5 @@
 .env
-*.env
-config.json
-*.key
-*.pem
-__pycache__/
+**/*.env
+node_modules
+npm-debug.log*
+.DS_Store
